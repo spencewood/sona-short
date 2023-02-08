@@ -38,13 +38,14 @@ const LinksTable = ({
     <table className="table-auto">
       <thead>
         <tr>
-          <th className="px-4 py-2">Shortened Url</th>
-          <th className="px-4 py-2">
+          <th className="px-4 py-2 text-left hidden lg:block">Url</th>
+          <th className="px-4 py-2 text-left">Shorted Url</th>
+          <th className="px-4 py-2 text-left">
             <a href="" onClick={setSort(SortBy.Count)}>
               Count
             </a>
           </th>
-          <th className="px-4 py-2">
+          <th className="px-4 py-2 text-left">
             <a href="" onClick={setSort(SortBy.CreatedDate)}>
               Date Created
             </a>
@@ -54,20 +55,39 @@ const LinksTable = ({
       <tbody>
         {sortedList.map((link, idx) => (
           <tr key={link.id} className={idx % 2 === 0 ? "bg-gray-100" : ""}>
-            <td className="border px-4 py-2">
-              <Link href={`/links/${link.raw_shortened_path_id}`}>
+            <td className="border px-2 lg:px-4 py-2 flex items-center hidden lg:table-cell">
+              <div className="max-w-2xl truncate">
+                <Link
+                  href={`/links/${link.raw_shortened_path_id}`}
+                  className="hover:text-teal-800"
+                >
+                  {link.uri}
+                </Link>
+              </div>
+            </td>
+            <td className="border px-2 lg:px-4">
+              <div className="flex">
+              <div className="truncate max-w-[100px] lg:max-w-fit" >
+              <Link
+                href={`/links/${link.raw_shortened_path_id}`}
+                className="hover:text-teal-800"
+              >
                 {link.shortened_uri}
               </Link>
+              </div>
               <Link
                 href={`/${link.raw_shortened_path_id}`}
                 onClick={navigate(link.raw_shortened_path_id)}
                 target="_blank"
               >
-                ex
+                <span className="material-symbols-outlined md-18 pl-1">
+                  open_in_new
+                </span>
               </Link>
+              </div>
             </td>
-            <td className="border px-4 py-2">{link.count}</td>
-            <td className="border px-4 py-2">{link.created_date}</td>
+            <td className="border px-2 lg:px-4 py-2">{link.count}</td>
+            <td className="border px-2 lg:px-4 py-2">{link.created_date}</td>
           </tr>
         ))}
       </tbody>

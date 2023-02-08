@@ -1,12 +1,9 @@
-import { Inter } from "@next/font/google";
 import { useState } from "react";
 import Download from "../components/download";
 import LinksTable from "../components/links_table";
 import UrlForm from "../components/url_form";
 import { getData } from "../data/data";
 import { ILink } from "../data/link.interface";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ links }: { links: ILink[] }) {
   const [localLinks, setLocalLinks] = useState(links);
@@ -30,12 +27,20 @@ export default function Home({ links }: { links: ILink[] }) {
   };
 
   return (
-    <div>
-      <div>
-        <UrlForm onAdd={addLink} />
+    <div className="">
+      <div className="flex flex-column justify-center items-center">
+        <div className="relative px-6 lg:px-8 bg-gray-100 w-full lg:w-3/6 p-2 py-10 text-xl drop-shadow-md rounded">
+          <UrlForm onAdd={addLink} />
+        </div>
       </div>
-      <Download />
-      <LinksTable links={localLinks} onNavigate={updateCount} />
+      <div className="flex justify-center items-center">
+        <div className="py-10">
+          <div className="flex justify-end w-full py-2">
+            <Download />
+          </div>
+          <LinksTable links={localLinks} onNavigate={updateCount} />
+        </div>
+      </div>
     </div>
   );
 }
