@@ -1,4 +1,5 @@
 import { useReducer, useState } from "react";
+import { ILink } from "../data/link.interface";
 import { isValidUri } from "../util/url";
 
 enum StateType {
@@ -39,7 +40,7 @@ const dataReducer = (_state: IState, action: IAction): IState => {
   }
 };
 
-const UrlForm = () => {
+const UrlForm = ({ onAdd }: { onAdd: (link: ILink) => void }) => {
   const [formValue, setFormValue] = useState("");
   const [dataState, dispatch] = useReducer(dataReducer, initialState);
 
@@ -55,6 +56,8 @@ const UrlForm = () => {
       });
       if (result.ok) {
         dispatch({ type: StateType.Loaded });
+        const link = await result.json();
+        onAdd(link);
       } else {
         dispatch({ type: StateType.Error, message: "Unable to register Link" });
       }

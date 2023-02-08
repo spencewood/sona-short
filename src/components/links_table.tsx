@@ -8,7 +8,13 @@ enum SortBy {
   CreatedDate = "created_date",
 }
 
-const LinksTable = ({ links }: { links: ILink[] }) => {
+const LinksTable = ({
+  links,
+  onNavigate,
+}: {
+  links: ILink[];
+  onNavigate: (id: string) => void;
+}) => {
   const [sortBy, setSortBy] = useState(SortBy.CreatedDate);
   const [sortDirection, setSortDirection] = useState(SortDirection.Ascending);
 
@@ -20,6 +26,10 @@ const LinksTable = ({ links }: { links: ILink[] }) => {
     }
 
     setSortBy(newSortBy);
+  };
+
+  const navigate = (id: string) => (e: React.MouseEvent) => {
+    onNavigate(id);
   };
 
   const sortedList = sort(links, sortBy, sortDirection);
@@ -48,7 +58,11 @@ const LinksTable = ({ links }: { links: ILink[] }) => {
               <Link href={`/links/${link.raw_shortened_path_id}`}>
                 {link.shortened_uri}
               </Link>
-              <Link href={`/${link.raw_shortened_path_id}`} target="_blank">
+              <Link
+                href={`/${link.raw_shortened_path_id}`}
+                onClick={navigate(link.raw_shortened_path_id)}
+                target="_blank"
+              >
                 ex
               </Link>
             </td>
