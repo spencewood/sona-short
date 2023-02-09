@@ -31,8 +31,9 @@ export const getData = (): Promise<ILink[]> => {
 };
 
 export const appendLink = async (link: ILink): Promise<void> => {
-  (links as ILink[]).push(link);
-  return saveData(links);
+  const data = await getData();
+  data.push(link);
+  return saveData(data);
 };
 
 export const updateCount = async (linkId: string): Promise<void> => {

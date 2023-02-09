@@ -8,5 +8,9 @@ export default async function handler(
 ) {
   const data = await getData();
 
-  res.status(200).send(data);
+  res
+    .status(200)
+    .setHeader("Content-Type", "text/json")
+    .setHeader("Content-disposition", "attachment; filename=links.json")
+    .send(JSON.stringify(data, null, 2));
 }

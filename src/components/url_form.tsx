@@ -63,7 +63,7 @@ const UrlForm = ({ onAdd }: { onAdd: (link: ILink) => void }) => {
         dispatch({ type: StateType.Error, message: "Unable to register Link" });
       }
     } else {
-      dispatch({ type: StateType.Error, message: "Invalid Link" });
+      dispatch({ type: StateType.Error, message: "Invalid URI" });
     }
   };
 
@@ -75,7 +75,7 @@ const UrlForm = ({ onAdd }: { onAdd: (link: ILink) => void }) => {
             value={formValue}
             onChange={(e) => setFormValue(e.target.value)}
             className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-            placeholder="https://google.com"
+            placeholder="https://example.com"
           />
           <button
             type="submit"
@@ -85,8 +85,8 @@ const UrlForm = ({ onAdd }: { onAdd: (link: ILink) => void }) => {
           </button>
         </div>
         {dataState?.state === StateType.Error ? (
-            <div className="text-red-500 pt-2">{dataState.errorMessage}</div>
-          ) : null}
+          <div className="text-red-500 pt-2">{dataState.errorMessage}</div>
+        ) : null}
       </form>
     </div>
   );
