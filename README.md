@@ -4,6 +4,12 @@ This is a URL shortener dashboard created with NextJS, TypeScript and Tailwind. 
 
 ## Setup
 
+An environment variable should be set for local development. You can simply create a `.env.local` by copying from the `.env.example`, or place the following in `.env.local`:
+
+```
+LOCAL_BASE=http://localhost:8080
+```
+
 ### Development
 
 Start a local dev server on http://localhost:8080.
