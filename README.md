@@ -14,7 +14,9 @@ $ yarn dev
 
 ### Build
 
-Build and run outside dev environment.
+Build and run production code. Note that the environment variable `LOCAL_BASE` is used to
+determine the base url where it is deployed for redirects. This will need to be updated
+accordingly (e.g. https://shortener.netlify.com).
 
 ```bash
 $ yarn build
@@ -40,3 +42,4 @@ fine for this exercise however.
 1. Saving data isn't ideal (see above) and would benefit from using an actual data store.
 2. There is no user distinction, so anyone with the site address can add to the list.
 3. Dates are limited as `yyyy-mm-dd` making sorting potentially inconsistent.
+4. I have excluded testing trivial components
