@@ -4,7 +4,7 @@ import { ILink } from "./link.interface";
 
 const tmpFilePath = "/tmp/links.json";
 
-const saveData = (data: unknown): Promise<void> => {
+const saveData = async (data: unknown): Promise<void> => {
   return new Promise((resolve, reject) => {
     try {
       fs.writeFile(tmpFilePath, JSON.stringify(data, null, 2), () => {
@@ -16,7 +16,7 @@ const saveData = (data: unknown): Promise<void> => {
   });
 };
 
-export const getData = (): Promise<ILink[]> => {
+export const getData = async (): Promise<ILink[]> => {
   return new Promise((resolve, reject) => {
     if (fs.existsSync(tmpFilePath)) {
       return fs.readFile(tmpFilePath, (err, data) => {
