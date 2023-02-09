@@ -50,11 +50,16 @@ const UrlForm = ({ onAdd }: { onAdd: (link: ILink) => void }) => {
     dispatch({ type: StateType.Loading });
 
     if (isValidUri(formValue)) {
-      const result = await fetch("/api/link", {
-        method: "POST",
-        body: formValue,
-      });
-      if (result.ok) {
+      let result;
+      try {
+        result = await fetch("/api/link", {
+          method: "POST",
+          body: formValue,
+        });
+      } catch (err) {
+        //
+      }
+      if (result?.ok) {
         dispatch({ type: StateType.Loaded });
         const link = await result.json();
         onAdd(link);
@@ -73,6 +78,7 @@ const UrlForm = ({ onAdd }: { onAdd: (link: ILink) => void }) => {
         <div className="flex items-center border-b border-yellow-500 py-1">
           <input
             value={formValue}
+            data-testid="entry"
             onChange={(e) => setFormValue(e.target.value)}
             className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
             placeholder="https://example.com"
